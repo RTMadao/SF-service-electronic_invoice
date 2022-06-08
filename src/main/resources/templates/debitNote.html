@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nota Credito</title>
+    <style>
+        @page {
+            size: letter;
+        }
+    </style>
+</head>
+<body>
+<table role="presentation" style="width: 100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">
+    <tr style="padding: 10px 4px 5px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td rowspan="2" style="width: 65%; text-align: center; font-size: 16px; font-family: Arial,sans-serif;">
+                    <h2 th:text="${debitNote.getAccountingSupplierParty().getRegistrationName()}"></h2>
+                    <span th:text="'NIT.: '+${debitNote.getAccountingSupplierParty().getCompanyID().getId()}+'-'+${debitNote.getAccountingSupplierParty().getCompanyID().getSchemeID()}"></span><br/>
+                    <small>Somos responsables de IVA</small>
+                </td>
+                <td style="text-align: center; border: 1px solid black; padding: 8px; line-height: 1.4; font-size: 12px; font-family: Arial,sans-serif; margin-top: -2px">
+                    Nota Débito <br/>
+                    <span th:text="${debitNote.getID()}"></span><br/>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; border: 1px solid black; padding: 8px;font-size: 12px; font-family: Arial,sans-serif;">
+                    Fecha de Emisión: <span th:text="${debitNote.getIssueDate()}"></span><br/>
+                    Tipo de Pago: <span th:text="(${debitNote.getPaymentMeans().get(0).getID()}==1)?'Contado':'Crédito'"></span>
+                </td>
+            </tr>
+        </table>
+    </tr>
+    <tr style="padding: 5px 4px 5px;">
+        <table style="width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 12px;font-family: Arial,sans-serif;">
+            <tr>
+                <th colspan="2" style="border-bottom: 1px solid gray; padding: 8px; font-size: 16px; font-family: Arial,sans-serif;">
+                    Datos del Cliente
+                </th>
+            </tr>
+            <tr>
+                <td style="width: 60%; padding: 10px 8px 8px 8px">
+                    Razón Social: <span th:text="${debitNote.getAccountingCustomerParty().getRegistrationName()}"></span>
+                </td>
+                <td style="padding: 10px 8px 8px 8px">
+                    ID: <span th:text="${debitNote.getAccountingCustomerParty().getCompanyID().getId()}"/><span th:text="(${debitNote.getAccountingCustomerParty().getCompanyID().getSchemeName()}==31)?'-'+${debitNote.getAccountingCustomerParty().getCompanyID().getSchemeID()}:''"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 8px">
+                    Dirección: <span th:text="${debitNote.getAccountingCustomerParty().getAddress().getAddressLine().getLine()}"/>
+                </td>
+                <td style="padding: 8px">
+                    Ciudad: <span th:text="${debitNote.getAccountingCustomerParty().getAddress().getCityName()}+', '+${debitNote.getAccountingCustomerParty().getAddress().getCountrySubentity()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 8px">
+                    e-Mail: <span th:text="${debitNote.getAccountingCustomerParty().getParty().getContact().getElectronicMail()}"/>
+                </td>
+                <td style="padding: 8px">
+                    Teléfono: <span th:text="${debitNote.getAccountingCustomerParty().getParty().getContact().getTelephone()}"/>
+                </td>
+            </tr>
+        </table>
+    </tr>
+    <tr>
+        <table style="border-collapse: collapse; border: 1px solid black; width: 100%; height: 320px; margin-top: 6px; font-size: 12px;font-family: Arial,sans-serif;">
+            <tr style=" height: 20px;">
+                <th rowspan="2" style="width: 40px; border: 1px solid gray; border-radius: 10px; border-top-style: none; border-left-style: none; padding: 6px;text-align: center;">
+                    Item
+                </th>
+                <th rowspan="2" style="border: 1px solid gray; border-top-style: none; padding: 6px;text-align: center;">
+                    Descripción
+                </th>
+                <th rowspan="2" style="width: 40px;border: 1px solid gray; border-top-style: none;padding: 6px;text-align: center;">
+                    Cant.
+                </th>
+                <th rowspan="2" style="width: 40px;border: 1px solid gray; border-top-style: none;padding: 6px;text-align: center;">
+                    U/M
+                </th>
+                <th rowspan="2" style="width: 70px; border: 1px solid gray; border-top-style: none;padding: 6px;text-align: center;">
+                    Precio
+                    Unitario
+                </th>
+                <th colspan="2" style="border: 1px solid gray; border-top-style: none;padding: 6px 6px 3px 6px;text-align: center;">
+                    IVA
+                </th>
+                <th rowspan="2" style="width: 70px; border: 1px solid gray; border-top-style: none; border-right-style: none;padding: 6px;text-align: center;">
+                    Valor Venta
+                </th>
+            </tr>
+            <tr style=" height: 20px;">
+                <th style="width: 70px;border: 1px solid gray;padding: 3px 3px 6px 6px;text-align: center;">
+                    %
+                </th>
+                <th style="width: 70px; border: 1px solid gray;padding: 3px 6px 6px 3px;text-align: center;">
+                    Valor
+                </th>
+            </tr>
+            <tr th:each="line : ${debitNote.getDebitNoteLines()}" style=" height: 20px;">
+                <td th:text="${line.getID().getValue()}" style="text-align: center;padding: 6px;"/>
+                <td th:text="${line.getItem().getDescription()}" style="padding: 6px;"/>
+                <td th:text="${line.getDocumentQuantity().getValue()}" style="text-align: center; padding: 6px;"/>
+                <td th:text="${line.getDocumentQuantity().getUnitCodeName()}" style="text-align: center; padding: 6px;"/>
+                <td th:text="${line.getPrice().getPriceAmount().getPaidAmount()}" style="text-align: right; padding: 6px;"/>
+                <td th:text="${line.getTaxTotals().get(0).getTaxSubtotal().get(0).getTaxCategory().getPercent()}+'%'" style="text-align: center; padding: 6px 3px 6px 6px;"/>
+                <td th:text="${line.getTaxTotals().get(0).getTaxAmount().getPaidAmount()}" style="text-align: right; padding: 6px 6px 6px 3px;"/>
+                <td th:text="${line.getLineExtensionAmount().getPaidAmount()}" style="text-align: right; padding: 6px"/>
+            </tr>
+            <tr></tr>
+            <tr th:each="charges : ${debitNote.getAllowanceCharges()}" style=" height: 20px;">
+                <td th:text="(${charges.getChargeIndicator()})?'Cargo':'Descuento'" style="text-align: center;padding: 6px;"/>
+                <td th:text="${charges.getAllowanceChargeReason()}+'('+${charges.getMultiplierFactorNumeric()}+'%)'" style="padding: 6px;"/>
+                <td th:text="${charges.getAmount().getPaidAmount()}" colspan="6" style="text-align: right; padding: 6px"/>
+            </tr>
+        </table>
+    </tr>
+
+    <tr>
+        <table style="border: 1px solid black; width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px;font-family: Arial,sans-serif;">
+            <tr>
+                <td rowspan="6" style="padding: 8px 10px; border: 1px solid black; width: 500px;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 9px;font-family: Arial,sans-serif;">
+                        <tr>
+                            <td rowspan="4" style="padding: 0px 0px; width: 190px;">
+                                <img  th:src="${'data:image/png;charset=utf-8;base64,'+debitNote.generateQRCode(162,162)}" alt="Código QR"/>
+                            </td>
+                            <td style="padding: 4px; word-wrap: break-word;">
+                                CUDE: <span th:text="${debitNote.getCUDE().getValue()}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px">
+                                Documento validado por la DIAN - <span th:text="${debitNote.getValidationDateTime()}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px">
+                                Documento Generado el: <span th:text="${debitNote.getGenerationDateTime()}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px">
+                                Generado por <span th:text="${debitNote.getAccountingSupplierParty().getRegistrationName()}"/> <span th:text="'NIT.: '+${debitNote.getAccountingSupplierParty().getCompanyID().getId()}+'-'+${debitNote.getAccountingSupplierParty().getCompanyID().getSchemeID()}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="padding: 4px; width: 190px;">
+                    <b>Subtotal</b>
+                </td>
+                <td style="text-align: right; padding: 4px">
+                    <span th:text="${debitNote.getLegalMonetaryTotal().getLineExtensionAmount().getPaidAmount()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 4px">
+                    <b>Total IVA</b>
+                </td>
+                <td style="text-align: right; padding: 4px">
+                    <span th:text="${debitNote.getTaxTotal().get(0).getTaxAmount().getPaidAmount()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 4px">
+                    <b>Total Neto Nota Débito</b>
+                </td>
+                <td style="text-align: right; padding: 4px">
+                    <span th:text="${debitNote.getLegalMonetaryTotal().getTaxInclusiveAmount().getPaidAmount()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 4px">
+                    <b>Total Descuentos Globales</b>
+                </td>
+                <td style="text-align: right; padding: 4px">
+                    <span th:text="'-'+${debitNote.getLegalMonetaryTotal().getAllowanceTotalAmount().getPaidAmount()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 4px">
+                    <b>Total Recargos Globales</b>
+                </td>
+                <td style="text-align: right; padding: 4px">
+                    <span th:text="${debitNote.getLegalMonetaryTotal().getChargeTotalAmount().getPaidAmount()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 4px">
+                    <b>Total Nota Débito</b>
+                </td>
+                <td style="text-align: right; padding: 4px">
+                    <span th:text="${debitNote.getLegalMonetaryTotal().getPayableAmount().getPaidAmount()}"/>
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+    </tr>
+    <tr style="padding: 5px 4px 5px;">
+        <table style="border: 1px solid black; width: 100%; margin-top: 8px; height: 60px; font-size: 12px;font-family: Arial,sans-serif;">
+            <tr style="padding: 8px 10px;border-right: 1px solid black;">
+                <td>
+                    <span th:text="${debitNote.getNote()}"/>
+                </td>
+            </tr>
+        </table>
+    </tr>
+    <tr style="padding: 5px 10px 5px;">
+        <table style="width: 100%; margin-top: 8px; font-size: 14px; color: rgb(80, 80, 80);font-family: Arial,sans-serif;">
+            <tr>
+                <td style="width: 25%; text-align: center;">
+                    <span th:text="'Documento Relacionado: '+${debitNote.getRelatedInvoice().getID()}"/>
+                </td>
+                <td style="width: 25%; text-align: center;">
+                    <span th:text="'Fecha de Emisión: '+${debitNote.getRelatedInvoice().getIssueDate()}"/>
+                </td>
+            </tr>
+        </table>
+    </tr>
+    <tr style="padding: 5px 10px 2px;">
+        <table style="width: 100%;font-size: 10px; color: rgb(80, 80, 80); margin: 12px;font-family: Arial,sans-serif;">
+            <tr>
+                <td style="width: 100%; text-align: center;">
+                    DIR.: <span th:text="${debitNote.getAccountingSupplierParty().getAddress().getAddressLine().getLine()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; text-align: center;">
+                    TEL. <span th:text="${debitNote.getAccountingSupplierParty().getParty().getContact().getTelephone()}"/> - E-MAIL: <span th:text="${debitNote.getAccountingSupplierParty().getParty().getContact().getElectronicMail()}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; text-align: center;">
+                    <span th:text="${debitNote.getAccountingSupplierParty().getAddress().getCityName()}+' - '+${debitNote.getAccountingSupplierParty().getAddress().getCountrySubentity()}"/>
+                </td>
+            </tr>
+        </table>
+    </tr>
+</table>
+</body>
+</html>

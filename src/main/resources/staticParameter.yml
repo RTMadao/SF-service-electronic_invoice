@@ -1,0 +1,10 @@
+parameter:
+  UBLVersionID: UBL 2.1
+  identificationCodeValue: CO
+  identificationCodeListAgencyID: 6
+  identificationCodeListAgencyName: United Nations Economic Commission for Europe
+  identificationCodeListSchemeURI: urn:oasis:names:specification:ubl:codelist:gc:CountryIdentificationCode-2.1
+  invoiceProfileID: DIAN 2.1
+  CUDESchemeName: CUFE-SHA384
+  xmlDirectoryPath: /home/madao/Documentos/proyectos/Proyecto grado/ElectronicDocuments/
+  assignCode: 123
