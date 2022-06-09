@@ -47,12 +47,12 @@ class ElectronicInvoiceApplicationTests {
 
 	@Autowired
 	private ElectronicDocumentService electronicDocumentService;
-
+/*
 	Invoice getInvoice(){
 		Invoice invoice = new Invoice();
 		invoice.setCustomizationID("01");
 		invoice.setProfileExecutionID("2");
-		invoice.setID("SF1");
+		//invoice.setID("SF1");
 		invoice.setDueDate("2022-06-20");
 		invoice.setNote("Nota");
 		invoice.setInvoiceTypeCode("01");
@@ -71,7 +71,7 @@ class ElectronicInvoiceApplicationTests {
 		invoice.setAccountingSupplierParty(new AccountingSupplierParty());
 		invoice.getAccountingSupplierParty().setAdditionalAccountID("1");
 		invoice.setLineCountNumeric("2");
-		invoice.getAccountingSupplierParty().setParty(
+		/*invoice.getAccountingSupplierParty().setParty(
 				new Party("AAA","Nombre Tienda",
 						new Location(
 								new Address("11001","Bogotá, D.c.","11001","Bogotá","11",new AddressLine("Kenndy"),new Contry("CO",new ContryName("Colombia","es")))
@@ -476,5 +476,5 @@ class ElectronicInvoiceApplicationTests {
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
-	}
+	}*/
 }

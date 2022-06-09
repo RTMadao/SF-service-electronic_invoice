@@ -32,7 +32,7 @@ public class CreditNoteController {
     }
     @GetMapping("/get/pdf/{filePath}")
     public void getPdf(@PathVariable("filePath") String filePath, HttpServletResponse response){
-        filePath = filePath.replaceAll("_","/");
+        filePath = filePath.replaceAll("-","/");
 
         try {
             File file = new File(filePath);

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.RTM.services.co'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
@@ -94,11 +94,6 @@ dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
-}
-
-bootJar {
-	baseName = 'gs-consuming-web-service'
-	version =  '0.0.1'
 }
 
 tasks.named('test') {

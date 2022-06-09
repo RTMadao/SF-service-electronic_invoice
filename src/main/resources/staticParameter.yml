@@ -6,5 +6,5 @@ parameter:
   identificationCodeListSchemeURI: urn:oasis:names:specification:ubl:codelist:gc:CountryIdentificationCode-2.1
   invoiceProfileID: DIAN 2.1
   CUDESchemeName: CUFE-SHA384
-  xmlDirectoryPath: /home/madao/Documentos/proyectos/Proyecto grado/ElectronicDocuments/
+  xmlDirectoryPath: /home/spring/salcedo_fawcett/generated_resource/
   assignCode: 123

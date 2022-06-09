@@ -47,6 +47,7 @@ public class generatePDF {
     @Autowired
     private ElectronicDocumentService electronicDocumentService;
     private Logger logger = LoggerFactory.getLogger(generatePDF.class);
+    /*
     Invoice getInvoice(){
         Invoice invoice = new Invoice();
         invoice.setCustomizationID("01");
@@ -197,5 +198,5 @@ public class generatePDF {
         //} catch (DocumentException e) {
         //    throw new RuntimeException(e);
         //}
-    }
+    }*/
 }

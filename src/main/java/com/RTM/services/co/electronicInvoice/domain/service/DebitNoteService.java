@@ -1,13 +1,10 @@
 package com.RTM.services.co.electronicInvoice.domain.service;
 
 import com.RTM.services.co.electronicInvoice.client.EmailClient;
-import com.RTM.services.co.electronicInvoice.domain.model.DocumentBuilder.CreditNoteBuilder;
 import com.RTM.services.co.electronicInvoice.domain.model.DocumentBuilder.DebitNoteBuilder;
 import com.RTM.services.co.electronicInvoice.domain.model.ElectronicDocument.ApplicationResponse;
 import com.RTM.services.co.electronicInvoice.domain.model.ElectronicDocument.AttachedDocument;
-import com.RTM.services.co.electronicInvoice.domain.model.ElectronicDocument.CreditNote;
 import com.RTM.services.co.electronicInvoice.domain.model.ElectronicDocument.DebitNote;
-import com.RTM.services.co.electronicInvoice.domain.model.PDGGenerator.CreditNotePDFContext;
 import com.RTM.services.co.electronicInvoice.domain.model.PDGGenerator.DebitNotePDFContext;
 import com.RTM.services.co.electronicInvoice.domain.model.util.ElectronicDocumentEmailInfo;
 import com.RTM.services.co.electronicInvoice.domain.model.util.StaticParameter;

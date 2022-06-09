@@ -7,8 +7,9 @@ import com.RTM.services.co.electronicInvoice.domain.model.party.taxScheme.PartyT
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlType(propOrder={"industryClasificationCode","partyName","physicalLocation","partyTaxScheme","partyLegalEntity","contact"})
+@XmlType(propOrder={"industryClasificationCode","partyIdentification","partyName","physicalLocation","partyTaxScheme","partyLegalEntity","contact"})
 public class Party {
+    private PartyIdentification partyIdentification;
     private String industryClasificationCode;
     private String partyName;
     private Location physicalLocation;
@@ -18,15 +19,20 @@ public class Party {
 
     public Party() {}
 
-    public Party(String industryClasificationCode, String partyName, Location physicalLocation, PartyTaxScheme partyTaxScheme, PartyLegalEntity partyLegalEntity, Contact contact) {
+    public Party(String industryClasificationCode, String partyName, Location physicalLocation, PartyTaxScheme partyTaxScheme, PartyLegalEntity partyLegalEntity, Contact contact, PartyIdentification partyIdentification) {
         this.industryClasificationCode = industryClasificationCode;
         this.partyName = partyName;
         this.physicalLocation = physicalLocation;
         this.partyTaxScheme = partyTaxScheme;
         this.partyLegalEntity = partyLegalEntity;
         this.contact = contact;
+        this.partyIdentification = partyIdentification;
     }
 
+    @XmlElement(name = "PartyIdentification", namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
+    public PartyIdentification getPartyIdentification() {
+        return partyIdentification;
+    }
     @XmlElement(name = "IndustryClasificationCode", namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
     public String getIndustryClasificationCode() {
         return industryClasificationCode;
@@ -69,5 +75,8 @@ public class Party {
     }
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+    public void setPartyIdentification(PartyIdentification partyIdentification) {
+        this.partyIdentification = partyIdentification;
     }
 }

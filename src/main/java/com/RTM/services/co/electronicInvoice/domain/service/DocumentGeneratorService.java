@@ -39,7 +39,7 @@ public class DocumentGeneratorService {
         return renderPdf(html,docname);
     }
     public String generateZipFile(List<File> files, String fileName){
-        String zipPath = System.getProperty("java.io.tmpdir") + File.separator + fileName;
+        String zipPath = staticParameter.getXmlDirectoryPath()+File.separator +"tmp"+File.separator+fileName;
         new File(zipPath).delete();
 
         try (FileOutputStream fos = new FileOutputStream(zipPath);

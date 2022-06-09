@@ -9,8 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class getPDFFile {
     @Autowired
     private InvoiceService invoiceService;
+    /*
     @Test
     public void getDataFromXml(){
         invoiceService.getInvoicePDF("/home/madao/Documentos/proyectos/Proyecto grado/ElectronicDocuments/invoice/fv09012490791232200013.xml");
-    }
+    }*/
 }
