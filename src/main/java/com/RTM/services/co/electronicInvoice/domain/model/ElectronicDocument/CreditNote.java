@@ -42,7 +42,7 @@ import java.util.List;
         "issueDate","issueTime","creditNoteTypeCode","note","documentCurrencyCode","lineCountNumeric","invoicePeriod",
         "discrepancyResponse","invoiceReference","orderReference","despatchDocumentReference",
         "receiptDocumentReference","additionalDocumentReference","accountingSupplierParty","accountingCustomerParty",
-        "taxRepresentativeParty","delivery","deliveryTerms","prepaidPayment","paymentExchangeRate","allowanceCharges",
+        "taxRepresentativeParty","delivery","deliveryTerms","paymentMeans","paymentExchangeRate","allowanceCharges",
         "taxTotal","legalMonetaryTotal","creditNoteLines"
 })
 public class CreditNote extends ElectronicDocument{
@@ -50,7 +50,6 @@ public class CreditNote extends ElectronicDocument{
     private DiscrepancyResponse discrepancyResponse;
     private BillingReferenceInvoice invoiceReference;
     private AppendDocument additionalDocumentReference;
-    private List<PrepaidPayment> prepaidPayment;
     private List<CreditNoteLine> creditNoteLines;
 
     public CreditNote() {}
@@ -157,9 +156,9 @@ public class CreditNote extends ElectronicDocument{
     public List<DeliveryTerms> getDeliveryTerms() {
         return deliveryTerms;
     }
-    @XmlElement(name = "PrepaidPayment", namespace = "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
-    public List<PrepaidPayment> getPrepaidPayment() {
-        return prepaidPayment;
+    @XmlElement(name = "PaymentMeans", namespace = "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
+    public List<PaymentMeans> getPaymentMeans() {
+        return paymentMeans;
     }
     @XmlElement(name = "AllowanceCharge", namespace = "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
     public List<AllowanceCharge> getAllowanceCharges() {
@@ -227,9 +226,6 @@ public class CreditNote extends ElectronicDocument{
     }
     public void setAdditionalDocumentReference(AppendDocument additionalDocumentReference) {
         this.additionalDocumentReference = additionalDocumentReference;
-    }
-    public void setPrepaidPayment(List<PrepaidPayment> prepaidPayment) {
-        this.prepaidPayment = prepaidPayment;
     }
     public void setCreditNoteLines(List<CreditNoteLine> creditNoteLines) {
         this.creditNoteLines = creditNoteLines;

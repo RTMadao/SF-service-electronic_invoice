@@ -52,7 +52,6 @@ public class Invoice extends ElectronicDocument{
     private BillingReferenceCN creditNoteReference;
     private BillingReferenceDN debitNoteReference;
     private AppendDocument additionalDocumentReference;
-    private List<PaymentMeans> paymentMeans;
     private List<PrepaidPayment> prepaidPayment;
     private List<InvoiceLine> invoiceLines;
 
@@ -241,9 +240,6 @@ public class Invoice extends ElectronicDocument{
     }
     public void setAdditionalDocumentReference(AppendDocument additionalDocumentReference) {
         this.additionalDocumentReference = additionalDocumentReference;
-    }
-    public void setPaymentMeans(List<PaymentMeans> paymentMeans) {
-        this.paymentMeans = paymentMeans;
     }
     public void setPrepaidPayment(List<PrepaidPayment> prepaidPayment) {
         this.prepaidPayment = prepaidPayment;

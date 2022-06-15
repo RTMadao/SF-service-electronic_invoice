@@ -95,6 +95,7 @@ public class DebitNoteBuilder implements DocumentBuilder{
     public void setPaymentAmount(ElectronicDocument document){
         DebitNote currentDebitNote = (DebitNote) document;
 
+        this.document.setPrepaidPayment(currentDebitNote.getPrepaidPayment());
         this.document.setPaymentMeans(currentDebitNote.getPaymentMeans());
         this.document.setPaymentExchangeRate(currentDebitNote.getPaymentExchangeRate());
         this.document.setAllowanceCharges(currentDebitNote.getAllowanceCharges());
@@ -185,6 +186,7 @@ public class DebitNoteBuilder implements DocumentBuilder{
         this.document.setDocumentCurrencyCode(new DocumentCurrencyCode(currencyCode));
         this.document.getLegalMonetaryTotal().setCurrencyCode(currencyCode);
         this.document.getDebitNoteLines().forEach(line -> line.setCurrencyCode(currencyCode));
+        if(this.document.getPrepaidPayment() != null )this.document.getPrepaidPayment().forEach(prepaidPayment -> prepaidPayment.getPaidAmount().setCurrencyID(currencyCode));
         if(this.document.getAllowanceCharges() != null )this.document.getAllowanceCharges().forEach(allowanceCharge -> allowanceCharge.setCurrencyCode(currencyCode));
         if(this.document.getTaxTotal() != null )this.document.getTaxTotal().forEach(taxTotal -> taxTotal.setCurrencyCode(currencyCode));
     }

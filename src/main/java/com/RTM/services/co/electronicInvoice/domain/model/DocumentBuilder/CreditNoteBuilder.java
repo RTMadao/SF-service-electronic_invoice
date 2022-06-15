@@ -96,7 +96,7 @@ public class CreditNoteBuilder implements DocumentBuilder{
     public void setPaymentAmount(ElectronicDocument document){
         CreditNote currentCreditNote = (CreditNote) document;
 
-        this.document.setPrepaidPayment(currentCreditNote.getPrepaidPayment());
+        this.document.setPaymentMeans(currentCreditNote.getPaymentMeans());
         this.document.setPaymentExchangeRate(currentCreditNote.getPaymentExchangeRate());
         this.document.setAllowanceCharges(currentCreditNote.getAllowanceCharges());
         this.document.setTaxTotal(currentCreditNote.getTaxTotal());
@@ -186,7 +186,6 @@ public class CreditNoteBuilder implements DocumentBuilder{
         this.document.setDocumentCurrencyCode(new DocumentCurrencyCode(currencyCode));
         this.document.getLegalMonetaryTotal().setCurrencyCode(currencyCode);
         this.document.getCreditNoteLines().forEach(line -> line.setCurrencyCode(currencyCode));
-        if(this.document.getPrepaidPayment() != null )this.document.getPrepaidPayment().forEach(prepaidPayment -> prepaidPayment.getPaidAmount().setCurrencyID(currencyCode));
         if(this.document.getAllowanceCharges() != null )this.document.getAllowanceCharges().forEach(allowanceCharge -> allowanceCharge.setCurrencyCode(currencyCode));
         if(this.document.getTaxTotal() != null )this.document.getTaxTotal().forEach(taxTotal -> taxTotal.setCurrencyCode(currencyCode));
     }

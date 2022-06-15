@@ -6,6 +6,7 @@ import com.RTM.services.co.electronicInvoice.domain.model.ID;
 import com.RTM.services.co.electronicInvoice.domain.model.Payment.AllowanceCharge;
 import com.RTM.services.co.electronicInvoice.domain.model.Payment.LegalMonetaryTotal;
 import com.RTM.services.co.electronicInvoice.domain.model.Payment.PaymentExchangeRate;
+import com.RTM.services.co.electronicInvoice.domain.model.Payment.PaymentMeans;
 import com.RTM.services.co.electronicInvoice.domain.model.Payment.tax.TaxTotal;
 import com.RTM.services.co.electronicInvoice.domain.model.Terms.DeliveryTerms;
 import com.RTM.services.co.electronicInvoice.domain.model.UBLExtensions.UBLExtensions;
@@ -41,6 +42,7 @@ public abstract class ElectronicDocument {
     protected TaxRepresentativeParty taxRepresentativeParty;
     protected Delivery delivery;
     protected List<DeliveryTerms> deliveryTerms;
+    protected List<PaymentMeans> paymentMeans;
     protected List<AllowanceCharge> allowanceCharges;
     protected PaymentExchangeRate paymentExchangeRate;
     protected List<TaxTotal> taxTotal;
@@ -71,6 +73,7 @@ public abstract class ElectronicDocument {
     public abstract Delivery getDelivery();
     public abstract List<DeliveryTerms> getDeliveryTerms();
     public abstract List<AllowanceCharge> getAllowanceCharges();
+    public abstract List<PaymentMeans> getPaymentMeans();
     public abstract PaymentExchangeRate getPaymentExchangeRate();
     public abstract List<TaxTotal> getTaxTotal();
     public abstract LegalMonetaryTotal getLegalMonetaryTotal();
@@ -158,4 +161,7 @@ public abstract class ElectronicDocument {
     }
     public abstract ID supplierPartyID();
     public abstract String getDocumentName(String assignCode, String fileNumber);
+    public void setPaymentMeans(List<PaymentMeans> paymentMeans) {
+        this.paymentMeans = paymentMeans;
+    }
 }

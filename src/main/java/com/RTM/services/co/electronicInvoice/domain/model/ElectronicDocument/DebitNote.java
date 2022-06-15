@@ -40,14 +40,14 @@ import java.util.List;
         "issueDate","issueTime","note","documentCurrencyCode","lineCountNumeric","invoicePeriod","discrepancyResponse",
         "invoiceReference","orderReference","despatchDocumentReference","receiptDocumentReference",
         "additionalDocumentReference","accountingSupplierParty","accountingCustomerParty","taxRepresentativeParty",
-        "delivery","deliveryTerms","paymentExchangeRate","paymentMeans","allowanceCharges","taxTotal",
+        "delivery","deliveryTerms","prepaidPayment","paymentExchangeRate","paymentMeans","allowanceCharges","taxTotal",
         "legalMonetaryTotal","debitNoteLines"
 })
 public class DebitNote extends ElectronicDocument{
     private DiscrepancyResponse discrepancyResponse;
     private BillingReferenceInvoice invoiceReference;
     private InvoiceDocumentReference additionalDocumentReference;
-    private List<PaymentMeans> paymentMeans;
+    private List<PrepaidPayment> prepaidPayment;
     private List<DebitNoteLine> debitNoteLines;
 
     public DebitNote() {}
@@ -146,6 +146,10 @@ public class DebitNote extends ElectronicDocument{
     public List<PaymentMeans> getPaymentMeans() {
         return paymentMeans;
     }
+    @XmlElement(name = "PrepaidPayment", namespace = "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
+    public List<PrepaidPayment> getPrepaidPayment() {
+        return prepaidPayment;
+    }
     @XmlElement(name = "AllowanceCharge", namespace = "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents‐2")
     public List<AllowanceCharge> getAllowanceCharges() {
         return allowanceCharges;
@@ -217,10 +221,10 @@ public class DebitNote extends ElectronicDocument{
     public void setAdditionalDocumentReference(InvoiceDocumentReference additionalDocumentReference) {
         this.additionalDocumentReference = additionalDocumentReference;
     }
-    public void setPaymentMeans(List<PaymentMeans> paymentMeans) {
-        this.paymentMeans = paymentMeans;
-    }
     public void setDebitNoteLines(List<DebitNoteLine> debitNoteLines) {
         this.debitNoteLines = debitNoteLines;
+    }
+    public void setPrepaidPayment(List<PrepaidPayment> prepaidPayment) {
+        this.prepaidPayment = prepaidPayment;
     }
 }
